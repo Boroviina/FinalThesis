@@ -16,7 +16,7 @@ const getProblemById=async (id)=>{
     return Problem.findById(id);
 }
 
-const updateProblem=async (problemId, updateBody)=>{
+const updateProblemById=async (problemId, updateBody)=>{
     const problem=await getProblemById(problemId);
     if(!problem){
         throw  new ApiError(httpStatus.BAD_REQUEST, "Problem not found");
@@ -27,7 +27,7 @@ const updateProblem=async (problemId, updateBody)=>{
 }
 
 const deleteProblemById=async(problemId)=>{
-    const problem=getProblemById(problemId);
+    const problem=await getProblemById(problemId);
     if (!problem){
         await new ApiError(httpStatus.BAD_REQUEST, 'Problem not found');
     }
@@ -38,7 +38,7 @@ const deleteProblemById=async(problemId)=>{
 module.exports={
     createProblem,
     getProblemById,
-    deleteProblemById, updateProblem,
+    deleteProblemById, updateProblemById,
     queryProblems
 
 }

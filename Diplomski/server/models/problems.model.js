@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {toJSON, paginate} = require('./plugins');
 const {problemType} = require('./enums/ProblemType');
+const {problemStatus} = require("./enums/ProblemStatus");
 
 
 const ProblemsSchema = mongoose.Schema({
@@ -13,18 +14,41 @@ const ProblemsSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    photos: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Photo'
+    city: {
+        type: String,
+        required: true,
     },
-    address: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Address'
+    street: {
+        type: String,
+        required: true
     },
-    contact: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Contact'
+    locationDescription: {
+        type: String
+    },
+    uri: {
+        type: [String],
+    },
+    contactName: {
+        type: String,
+    },
+    phoneNumber: {
+        type: String
+    },
+    contactEmail: {
+        type: String
+    },
+    status: {
+        type: String,
+        enum: problemStatus,
+        default: 'primljeno'
+    },
+    searchId: {
+        type: String,
+        required: true
     }
+}, {
+    timestamps: true,
+    collection: 'problems'
 })
 
 ProblemsSchema.plugin(toJSON);

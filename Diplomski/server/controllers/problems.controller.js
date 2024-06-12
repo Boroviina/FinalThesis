@@ -3,7 +3,6 @@ const pick=require('../utils/pick');
 const catchAsync=require('../utils/catchAsync');
 const httpStatus=require('http-status');
 const probemService=require('../services/problem.service');
-const {userService} = require("../services");
 
 const createProblem=catchAsync(async (req, res)=>{
     const problem=await probemService.createProblem(req.body);
@@ -26,7 +25,7 @@ const getProblem=catchAsync(async (req, res)=>{
 })
 
 const updateProblem=catchAsync(async (req, res)=>{
-    const problem=await userService.updateUserById(req.params.problemId, req.body);
+    const problem=await probemService.updateProblemById(req.params.problemId, req.body);
     res.send(problem);
 })
 
